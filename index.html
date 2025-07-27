@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <title>Тойға шақыру</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+<audio id="wedding-music" autoplay muted loop>
+    <source src="assets/Kanye%20West%20-%20Runaway%20%5BFull%20Version%5D%20%5BExplicit%5D.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="music-toggle">🎵</button>
+<section class="header">
+    <img src="assets/rings.jpg" alt="Flowers" class="flower-top">
+    <h2>Тойға шақырту</h2>
+    <br>
+    <br>
+
+    <h1>Жомарт <br> &
+        <br>
+        Ғайша</h1>
+    <h3>Үйлену тойы</h3>
+    <div class="gradient"></div>
+</section>
+
+<section class="intro">
+    <p>Біздің өміріміздің ең маңызды күніне – үйлену тойымызға шақырамыз!</p>
+    <img src="assets/Ornate%20Black%20Cross%20Border,%20Vintage%20Decorative%20Element.jfif" alt="">
+</section>
+
+<section class="info-card">
+    <h1>Той жайлы</h1>
+    <br>
+    <h3>Той иелері:</h3>
+    <h2>Нуралы - Асия</h2>
+    <br>
+    <p>Тойдың басталу уақыты:<br><strong>29.08.2025 / сағат 19:00</strong></p>
+
+    <br>
+    <p>Тойдың басталуына қалды:</p>
+    <div id="countdown">
+        <ul>
+            <li><span id="days"></span>Күн</li>
+            <li><span id="hours"></span>Сағат</li>
+            <li><span id="minutes"></span>Минут</li>
+            <li><span id="seconds"></span>Секунд</li>
+        </ul>
+    </div>
+
+</section>
+
+<!-- 4. Poetic Text Block -->
+<section class="quote">
+    <em>“Махаббат – бұл екі жүректің үндестігі...”</em>
+</section>
+
+<section class="location">
+    <h2>Мекенжай</h2>
+    <p>Салтанат Тойханасы, Астана</p>
+    <br>
+    <br>
+        <a class="gis-icon" href="https://go.2gis.com/8GtNp" target="_blank">
+            <img src="assets/unnamed.png" alt="2GIS">
+        </a>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d737.8387675007104!2d69.76163883447606!3d42.292288498333896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a8e1181af3fc7f%3A0xaa60b48558c12811!2z0KHQsNC70YLQsNC90LDRgg!5e0!3m2!1sru!2skz!4v1753637154249!5m2!1sru!2skz"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                width="100%"
+                height="400">
+        </iframe>
+    </div>
+</section>
+
+
+<section class="rsvp">
+    <h3>Сіз келе аласыз ба?</h3>
+    <form>
+        <label><input type="radio" name="attendance" value="yes"> Ия, міндетті түрде келемін</label>
+        <label><input type="radio" name="attendance" value="yes-with-someone"> Жұбайыммен бірге келеміз</label>
+        <label><input type="radio" name="attendance" value="no" required> Өкінішке орай келе алмаймын</label>
+        <input type="text" placeholder="Аты-жөніңіз" required>
+        <textarea placeholder="Тілектеріңіз"></textarea>
+        <button type="submit">Жіберу</button>
+    </form>
+</section>
+
+<section class="wishes">
+    <h3>Тілектер</h3>
+    <div class="slider">
+        <div class="slide">Көп бақыт тілеймін!</div>
+        <div class="slide">Ұзақ әрі бақытты өмір!</div>
+    </div>
+</section>
+
+<script src="scripts/script.js"></script>
+</body>
+</html>
