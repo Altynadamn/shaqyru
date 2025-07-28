@@ -1,47 +1,74 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzFfxeE-lJyrOBTgRqyvK0KKPfgVv-gM3C1YBDgVgSHOUuBLaap7gTgkRDmaRXhtvDu/exec'; // Replace with your Google Apps Script Web app URL
-const form = document.forms['rsvp-form'];
+(function () {
+    const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    const submitButton = form.querySelector('button[type="submit"]');
-    const formMessage = document.getElementById('form-message');
-    submitButton.disabled = true;
+    let today = new Date(),
+        yyyy = today.getFullYear(),
+        birthday = new Date(`${yyyy}-08-29T19:00:00`);
 
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                formMessage.style.display = 'block';
-                formMessage.textContent = 'Тілегіңіз сәтті жіберілді!';
-                form.reset();
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 3000);
-            } else {
-                formMessage.style.display = 'block';
-                formMessage.textContent = 'Қателік пайда болды. Қайтадан көріңіз.';
+    if (today > birthday) {
+        birthday = new Date(`${yyyy + 1}-08-29T19:00:00`);
+    }
+
+    const countDown = birthday.getTime(),
+        x = setInterval(function () {
+            const now = new Date().getTime(),
+                distance = countDown - now;
+
+            document.getElementById("days").innerText = Math.floor(distance / day);
+            document.getElementById("hours").innerText = Math.floor((distance % day) / hour);
+            document.getElementById("minutes").innerText = Math.floor((distance % hour) / minute);
+            document.getElementById("seconds").innerText = Math.floor((distance % minute) / second);
+
+            if (distance < 0) {
+                document.getElementById("headline").innerText = "It's time!";
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                clearInterval(x);
             }
-            submitButton.disabled = false;
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            formMessage.style.display = 'block';
-            formMessage.textContent = 'Қателік пайда болды. Қайтадан көріңіз.';
-            submitButton.disabled = false;
-        });
-});
+        }, 1000);
+})();
 
-// Existing music toggle code (if present)
+// 🎵 Music toggle logic
 const music = document.getElementById('wedding-music');
-const musicBtn = document.getElementById('music-toggle');
-musicBtn.addEventListener('click', () => {
-    if (music.muted) {
-        music.muted = false;
-        musicBtn.textContent = '🔊';
+const toggleBtn = document.getElementById('music-toggle');
+music.muted = false;
+music.play();
+
+toggleBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        toggleBtn.textContent = '🎵';
     } else {
-        music.muted = true;
-        musicBtn.textContent = '🎵';
+        music.pause();
+        toggleBtn.textContent = '🔇';
     }
 });
 
-//https://script.google.com/macros/s/AKfycbzQIz182fbtTY5VY0jBlCVaRbMW6gHz0MABgW8rdYZbUH28w9KY4CzbOVYHW6_EJKw/exec
+// ✅ RSVP form submission logic
+document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = {
+        attendance: form.attendance.value,
+        name: form.name.value.trim(),
+        wishes: form.wishes.value.trim()
+    };
+//https://formspree.io/f/xrblkldp
+    //https://getform.io/f/axoymvwb
+    fetch("https://formspree.io/f/xrblkldp", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+            alert("Рақмет! Жауабыңыз қабылданды.");
+            form.reset();
+        })
+});
