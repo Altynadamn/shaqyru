@@ -31,7 +31,7 @@
         }, 1000);
 })();
 
-// 🎵 Music toggle logic
+// Music toggle logic
 const music = document.getElementById('wedding-music');
 const toggleBtn = document.getElementById('music-toggle');
 music.muted = false;
@@ -47,7 +47,7 @@ toggleBtn.addEventListener('click', () => {
     }
 });
 
-// ✅ RSVP form submission logic
+// RSVP form submission logic
 document.getElementById("rsvp-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -57,8 +57,7 @@ document.getElementById("rsvp-form").addEventListener("submit", function(e) {
         name: form.name.value.trim(),
         wishes: form.wishes.value.trim()
     };
-//https://formspree.io/f/xrblkldp
-    //https://getform.io/f/axoymvwb
+
     fetch("https://formspree.io/f/xrblkldp", {
         method: "POST",
         body: JSON.stringify(formData),
@@ -71,4 +70,25 @@ document.getElementById("rsvp-form").addEventListener("submit", function(e) {
             alert("Рақмет! Жауабыңыз қабылданды.");
             form.reset();
         })
+});
+
+// Intersection Observer for fade-in animations
+document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.fade-in, section, .wrapper_divider');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    elements.forEach(element => {
+        observer.observe(element);
+    });
 });
