@@ -1,47 +1,47 @@
-(function () {
-    const second = 1000,
-        minute = second * 60,
-        hour = minute * 60,
-        day = hour * 24;
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzFfxeE-lJyrOBTgRqyvK0KKPfgVv-gM3C1YBDgVgSHOUuBLaap7gTgkRDmaRXhtvDu/exec'; // Replace with your Google Apps Script Web app URL
+const form = document.forms['rsvp-form'];
 
-    let today = new Date(),
-        yyyy = today.getFullYear(),
-        birthday = new Date(`${yyyy}-08-29T19:00:00`);
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
+    const formMessage = document.getElementById('form-message');
+    submitButton.disabled = true;
 
-    if (today > birthday) {
-        birthday = new Date(`${yyyy + 1}-08-29T19:00:00`);
-    }
-
-    const countDown = birthday.getTime(),
-        x = setInterval(function () {
-            const now = new Date().getTime(),
-                distance = countDown - now;
-
-            document.getElementById("days").innerText = Math.floor(distance / day);
-            document.getElementById("hours").innerText = Math.floor((distance % day) / hour);
-            document.getElementById("minutes").innerText = Math.floor((distance % hour) / minute);
-            document.getElementById("seconds").innerText = Math.floor((distance % minute) / second);
-
-            if (distance < 0) {
-                document.getElementById("headline").innerText = "It's time!";
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("content").style.display = "block";
-                clearInterval(x);
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Тілегіңіз сәтті жіберілді!';
+                form.reset();
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Қателік пайда болды. Қайтадан көріңіз.';
             }
-        }, 1000);
-})();
+            submitButton.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            formMessage.style.display = 'block';
+            formMessage.textContent = 'Қателік пайда болды. Қайтадан көріңіз.';
+            submitButton.disabled = false;
+        });
+});
 
+// Existing music toggle code (if present)
 const music = document.getElementById('wedding-music');
-const toggleBtn = document.getElementById('music-toggle');
-music.muted = false;
-music.play();
-
-toggleBtn.addEventListener('click', () => {
-    if (music.paused) {
-        music.play();
-        toggleBtn.textContent = '🎵';
+const musicBtn = document.getElementById('music-toggle');
+musicBtn.addEventListener('click', () => {
+    if (music.muted) {
+        music.muted = false;
+        musicBtn.textContent = '🔊';
     } else {
-        music.pause();
-        toggleBtn.textContent = '🔇';
+        music.muted = true;
+        musicBtn.textContent = '🎵';
     }
 });
+
+//https://script.google.com/macros/s/AKfycbzQIz182fbtTY5VY0jBlCVaRbMW6gHz0MABgW8rdYZbUH28w9KY4CzbOVYHW6_EJKw/exec
