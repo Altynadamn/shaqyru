@@ -13,6 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Open Graph (для Facebook, Telegram, Viber и т.п.) -->
+    <meta property="og:title" content="Тойға шақырту" />
+    <meta property="og:description" content="Шақырту" />
+    <meta property="og:image" content="https://shaqyru-at1a.onrender.com/assets/rings.jpg" />
+    <meta property="og:url" content="https://твой-сайт.onrender.com/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="https://shaqyru-at1a.onrender.com/assets/rings.jpg" />
+    <meta name="twitter:title" content="Тойға шақырту" />
+    <meta name="twitter:description" content="Шақырту" />
+    <meta name="twitter:image" content="https://shaqyru-at1a.onrender.com/assets/rings.jpg" />
+
 </head>
 <body>
 <audio id="wedding-music" autoplay muted loop>
@@ -105,9 +118,9 @@
 </section>
 <section class="rsvp">
     <h3 class="fade-in" style="animation-delay: 0.3s;">Сіз келе аласыз ба?</h3>
-    <form id="rsvp-form" name="rsvp-form" class="fade-in" style="animation-delay: 0.4s;">
-        <label><input type="radio" name="attendance" value="yes" required> Ия, міндетті түрде келемін</label>
-        <label><input type="radio" name="attendance" value="yes-with-someone"> Жұбайыммен бірге келеміз</label>
+    <form id="rsvp-form" name="rsvp-form" class="fade-in" style="animation-delay: 0.4s;" action = "https://script.google.com/macros/s/AKfycbxrrs78N23zchNtAy54o2wlcNoEfjUV9lb3L9AUb-GdTrLJFBa2DQ1F92gZ-DRU7HcW/exec" method="POST">
+        <label><input type="radio" name="attendance" value="yes1" required> Ия, міндетті түрде келемін</label>
+        <label><input type="radio" name="attendance" value="yes2"> Жұбайыммен бірге келеміз</label>
         <label><input type="radio" name="attendance" value="no"> Өкінішке орай келе алмаймын</label>
         <input type="text" name="name" placeholder="Аты-жөніңіз" required>
         <textarea name="wishes" placeholder="Тілектеріңіз"></textarea>
